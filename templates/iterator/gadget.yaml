@@ -1,8 +1,0 @@
-name: "@GADGET_NAME@"
-description: Show currently running processes
-homepageURL: https://github.com/@REPOSITORY@
-documentationURL: https://github.com/@REPOSITORY@#readme
-sourceURL: https://github.com/@REPOSITORY@
-datasources:
-  processes:
-    fields: {}

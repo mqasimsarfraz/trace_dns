@@ -1,0 +1,11 @@
+name: "trace_dns"
+description: Trace chdir syscall attempts
+homepageURL: https://github.com/mqasimsarfraz/trace_dns
+documentationURL: https://github.com/mqasimsarfraz/trace_dns#readme
+sourceURL: https://github.com/mqasimsarfraz/trace_dns
+datasources:
+  events:
+    fields:
+      timestamp:
+        annotations:
+          description: Time the chdir syscall was entered
