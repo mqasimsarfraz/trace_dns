@@ -1,2 +1,4 @@
+github.com/inspektor-gadget/inspektor-gadget v0.57.0 h1:r8iqc7PGJXScaLaorYDaazK/1C3t616cYceeo6RSkLE=
+github.com/inspektor-gadget/inspektor-gadget v0.57.0/go.mod h1:UNCmWPOv7Gficwk345B7q7hGIW8Nya+O0fzgeWZJsw4=
 golang.org/x/net v0.62.0 h1:18ELalfM5+XNRwzM2nYqXsZQ9ByS1uhj2O/U7+5jqRY=
 golang.org/x/net v0.62.0/go.mod h1:WgDCOTH8iwtB66T4/GfI94AHo/hhdb7Hah9NDseQfiI=
