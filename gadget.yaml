@@ -45,6 +45,13 @@ datasources:
         annotations:
           description: Destination endpoint
           template: l4endpoint
+      ede:
+        annotations:
+          description: >-
+            Extended DNS Errors (RFC 8914) from EDNS option 15. Semicolon-separated
+            entries contain the numeric info code, its name when known, and
+            optional quoted extra text. Empty when no valid EDE is present.
+          columns.width: "40"
       id:
         annotations:
           description: DNS query/response ID, used to match queries with responses

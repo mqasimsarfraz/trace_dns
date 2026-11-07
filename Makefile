@@ -49,5 +49,9 @@ check:
 	$(CLANG_FORMAT) --dry-run --Werror $(SOURCES)
 
 .PHONY: test
-test:
+test: go-test
 	@if test -f tests/init.sh; then bash tests/init.sh; else $(MAKE) check; fi
+
+.PHONY: go-test
+go-test:
+	@if test -f go/go.mod; then cd go && go test ./...; fi
