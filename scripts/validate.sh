@@ -44,7 +44,7 @@ shell_files=(scripts/*.sh)
 if [[ $layout == template ]]; then shell_files+=(tests/init.sh); fi
 for file in "${shell_files[@]}"; do bash -n "$file"; done
 shellcheck "${shell_files[@]}"
-make check
+make check go-test
 git diff --check
 if [[ $layout == template ]]; then
     BUILD_GADGETS=1 bash tests/init.sh

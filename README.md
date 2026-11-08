@@ -57,10 +57,19 @@ configuration for `ig`, `kubectl gadget deploy`, and Helm.
 ## Events and limitations
 
 The BPF program emits packet metadata and appends the captured packet for
-userspace decoding. `gadget.yaml` also describes decoded fields such as `name`,
-`qtype`, `qr`, `rcode`, and `addresses`, but this repository currently has no
-userspace DNS parser implementation. Metadata alone does not populate those
-fields.
+userspace decoding by the Go/WASM parser in `go/program.go`. Decoded fields
+include `name`, `qtype`, `qr`, `rcode`, and `addresses`.
+
+The `ede` field decodes [Extended DNS Errors (RFC 8914)](https://www.rfc-editor.org/rfc/rfc8914)
+from EDNS option 15 in additional OPT records. For example:
+`6 (DNSSEC Bogus): "validation failed"`. Multiple errors are separated by `; `,
+unknown codes are shown numerically, and optional UTF-8 extra text is quoted
+with control characters escaped. EDE is also decoded on successful responses
+and does not change `rcode`. Without EDE the field is empty. Short EDE options
+are skipped with a warning; invalid UTF-8 text is omitted with a warning while
+retaining its info code. Other DNS fields remain available.
+
+Use JSON output (`-o json`) or select `ede` in column output to inspect errors.
 
 `latency_ns` measures the time between an outgoing query and an incoming response
 matched by process/thread ID and DNS transaction ID. It requires socket
@@ -95,7 +104,8 @@ without it, IG collects from containers by default.
 Events are emitted through a perf event array; buffer exhaustion can cause lost
 samples.
 Run `make metadata IMAGE_TAG=latest` after changing the event structure, review
-`gadget.yaml`, then `make check` to check formatting (`make clang-format` fixes it).
+`gadget.yaml`, then `make test` to run Go parser tests and check BPF formatting
+(`make clang-format` fixes it).
 Ordinary `make build` validates metadata without rewriting it.
 
 The retained initialization workflow safely does nothing on subsequent runs.
